@@ -24,6 +24,5 @@
                                 <li><a href="{{ route('users.all') }}">All Users</a></li>
                             </ul>
                         </li>
-                        <li><a href="maps.html"><i class="fa fa-map-marker"></i> <span>Maps</span></a></li>
                         
                     </ul>

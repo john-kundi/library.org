@@ -16,13 +16,5 @@
                                 <li><a href="data-tables.html">All Books</a></li>
                             </ul>
                         </li>
-
-                        <li class="parent"><a href=""><i class="fa fa-bars"></i> <span>Users</span></a>
-                            <ul class="children">
-                                <li><a href="basic-tables.html">Add User</a></li>
-                                <li><a href="data-tables.html">All Users</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="maps.html"><i class="fa fa-map-marker"></i> <span>Maps</span></a></li>
                         
                     </ul>

@@ -5,9 +5,13 @@
 
         <title> Library System</title>
 
+        <script src="/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="/assets/js/external/external.js"></script>
+
         <link href="/assets/css/style.default.css" rel="stylesheet">
         <link href="/assets/css/morris.css" rel="stylesheet">
         <link href="/assets/css/select2.css" rel="stylesheet" />
+        <link href="/assets/css/prettyPhoto.css" rel="stylesheet">
 
         <link href="/assets/css/jquery.tagsinput.css" rel="stylesheet" />
         <link href="/assets/css/toggles.css" rel="stylesheet" />
