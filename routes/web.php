@@ -40,10 +40,18 @@ Route::get('/admin-view-users', [AdminController::class, 'allusers'])->name('use
 Route::get('/admin-edit-user-form/{id}', [AdminController::class, 'edituser'])->name('edituser');
 Route::get('/admin-delete-user/{id}', [AdminController::class, 'deleteuser'])->name('deleteuser');
 Route::post('/admin-update-user/{id}', [AdminController::class, 'update'])->name('update.user');
+Route::get('/admin-edit-book/{id}', [AdminController::class, 'viewbook'])->name('admin.edit.book');
+Route::post('/admin-update-book/{id}', [AdminController::class, 'updatebook'])->name('admin.update.book');
+Route::get('/admin-delete-book/{id}', [AdminController::class, 'deletebook'])->name('admin.delete.book');
 
 //users routes
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
 Route::get('/users-signup', [RegisterController::class, 'signupform'])->name('signup.user');
 Route::post('/users-register', [RegisterController::class, 'registeruser'])->name('register.user');
+
+Route::get('/user-all-books', [UsersController::class, 'allbooks'])->name('user.all.books');
+Route::get('/user-mark-book/{id}', [UsersController::class, 'markbook'])->name('mark.fav');
+Route::get('/user-like-book/{id}', [UsersController::class, 'likebook'])->name('like.book');
+
 

@@ -1,6 +1,6 @@
 <div class="headerwrapper">
                 <div class="header-left">
-                    <a href="index.html" class="logo">
+                    <a href="{{ route('users.login') }}" class="logo">
                         <img src="/assets/images/logo.png" alt="" /> 
                     </a>
                     <div class="pull-right">

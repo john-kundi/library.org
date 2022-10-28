@@ -57,6 +57,8 @@ class AdminController extends Controller
         $book->pdf  = $dbpath;
         $book->category  = $request->category;
         $book->shelf = $request->shelf;
+        $book->fav_status = 'no';
+        $book->likes = 0;
         $book->published_date = $request->date;
         $book->createdby = Auth::user()->name;
         $book->save();
@@ -66,7 +68,7 @@ class AdminController extends Controller
 
     public function allbooks()
     {
-        $books = DB::table('books')
+        $book = DB::table('books')
                     ->select([
                         'books.id',
                         'books.name',
@@ -80,7 +82,7 @@ class AdminController extends Controller
                     ])
                     ->get();
 
-                    return view('contents.admin.allbooks')->with('books',$books);
+                    return view('contents.admin.allbooks')->with('books',$book);
     }
 
     public function userform()
@@ -192,5 +194,100 @@ class AdminController extends Controller
 
         return redirect()->route('users.all')->with('status','Congrats, User has been deleted successful.');
         
+    }
+
+    public function viewbook($id)
+    {
+        $category = DB::table('categories')->get();
+        $shelves = DB::table('shelves')->get();
+
+        $book = DB::table('books')
+                    ->select([
+                        'books.id',
+                        'books.name',
+                        'books.author',
+                        'books.category',
+                        'books.shelf',
+                        'books.code',
+                        'books.published_date as date'
+                    ])
+                    ->where('id',$id)
+                    ->first();
+
+        return view('contents.admin.bookeditform')
+                        ->with('category',$category)
+                        ->with('shelves',$shelves)
+                        ->with('book',$book);
+    }
+
+    public function updatebook(request $request,$id)
+    {
+        $this->validate($request,[
+                 'bookname' => 'required|string',
+                 'author' => 'required|string',
+                 'code' => 'required|string',
+                 'category' => 'required|string',
+                 'shelf' => 'required|string'
+        ]);
+
+        $record = DB::table('books')->where('id',$id);
+
+
+        if( !$request->file && ( ($request->shelf && $request->category) !== '-select-') ){
+
+        $record->update([
+               'name' => $request->bookname,
+               'author' => $request->author,
+               'code' => $request->code,
+               'published_date' => $request->date,
+               'category' => $request->category,
+               'shelf' => $request->shelf
+        ]);
+        return redirect()->route('admin.all.books')->with('status','Book updated successful');
+
+        }
+
+        elseif ( ($request->shelf && $request->category) !== '-select-' ) {
+        
+
+        $file = $request->book;
+        $filename = $file->getClientOriginalName();
+        $ext = $file->getClientOriginalExtension();
+        $securedfile = md5($file);
+        $ogfile = $securedfile.'.'.$ext;
+        $path = public_path().'/assets/books/';
+        $dbpath = '/assets/books/'.$ogfile;
+        $file->move($path,$ogfile);
+
+        $record->update([
+               'name' => $request->bookname,
+               'author' => $request->author,
+               'code' => $request->code,
+               'published_date' => $request->date,
+               'category' => $request->category,
+               'shelf' => $request->shelf,
+               'pdf' => $dbpath
+        ]);
+
+        return redirect()->route('admin.all.books')->with('status','Book updated successful');
+
+        }
+
+
+        else{
+                
+                return back()->with('status','Please choose proper category and shelf of book.');
+
+        }
+
+    }
+
+    public function deletebook($id)
+    {
+        $record = DB::table('books')->where('id',$id);
+        $record->delete();
+
+        return redirect()->route('admin.all.books')->with('status','Book deleted successful');
+
     }
 }

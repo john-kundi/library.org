@@ -13,7 +13,6 @@
                         <li class="parent"><a href=""><i class="fa fa-bars"></i> <span>Books</span></a>
                             <ul class="children">
                                 <li><a href="{{ route('admin.book.form') }}">Add Book</a></li>
-                                <li><a href="#">Popular Books</a></li>
                                 <li><a href="{{ route('admin.all.books') }}">All Books</a></li>
                             </ul>
                         </li>

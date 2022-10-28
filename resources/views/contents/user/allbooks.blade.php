@@ -7,13 +7,13 @@
     <body>
         
         <header>
-            @include('includes.admin.header')
+            @include('includes.user.header')
         </header>
         
         <section>
             <div class="mainwrapper">
                 <div class="leftpanel">
-                    @include('includes.admin.leftpanel')
+                    @include('includes.user.leftpanel')
                     
                 </div><!-- leftpanel -->
                 
@@ -71,7 +71,7 @@
                         <hr>
       
                         <div class="row">
-                          <div class="col-sm-12">
+                          <div class="col-sm-9">
                             <div class="row media-manager">
                               
                               @foreach($books as $book)
@@ -86,8 +86,13 @@
                                         <span class="caret"></span>
                                       </button>
                                       <ul class="dropdown-menu fm-menu pull-right" role="menu">
-                                        <li><a href="{{ route('admin.edit.book',$book->id) }}"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="{{ route('admin.delete.book',$book->id) }}"><i class="fa fa-trash-o"></i> Delete</a></li>
+            @if($book->fav_status == 'yes')
+            <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Unmark Favorite</a></li>
+            @elseif($book->fav_status == 'no')
+            <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
+            @endif
+                                        <li><a href="{{ route('like.book',$book->id) }}"><i class="fa fa-envelope-o"></i> Like</a></li>
+                                        <li><a href="#"><i class="fa fa-download"></i> Comment</a></li>
                                       </ul>
                                   </div><!-- btn-group -->
                                   <div class="thmb-prev">
@@ -114,6 +119,31 @@
                             
                             
                           </div><!-- col-sm-9 -->
+                          <div class="col-sm-3">
+                            <div class="media-manager-sidebar">
+                              
+                              <button class="btn btn-primary btn-block">Upload Files</button>
+                              
+                              <div class="mb30"></div>
+                              
+                              <h5 class="lg-title">Folders <a href="" class="pull-right">+ Add New Folder</a></h5>
+                              <ul class="folder-list">
+                                <li><a href=""><i class="fa fa-folder-o"></i> My Collection</a></li>
+                                <li><a href=""><i class="fa fa-folder-o"></i> Downloaded Books</a></li>
+                                <li><a href=""><i class="fa fa-folder-o"></i> Already Read E-book</a></li>
+                              </ul>
+                              
+                              <div class="mb30"></div>
+                              
+                              <h5 class="lg-title">Tags</h5>
+                              <ul class="tag-list">
+                                <li><a href="">Popular Books</a></li>
+                                <li><a href="">Marked Books</a></li>
+                                <li><a href="">E-book Documentation</a></li>
+                              </ul>
+                              
+                            </div>
+                          </div><!-- col-sm-3 -->
                         </div>
                       </div>
                     

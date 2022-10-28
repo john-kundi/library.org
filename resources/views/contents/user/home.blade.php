@@ -7,13 +7,13 @@
     <body>
         
         <header>
-            @include('includes.admin.header')
+            @include('includes.user.header')
         </header>
         
         <section>
             <div class="mainwrapper">
                 <div class="leftpanel">
-                    @include('includes.admin.leftpanel')
+                    @include('includes.user.leftpanel')
                     
                 </div><!-- leftpanel -->
                 
