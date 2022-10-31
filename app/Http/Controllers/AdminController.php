@@ -57,8 +57,6 @@ class AdminController extends Controller
         $book->pdf  = $dbpath;
         $book->category  = $request->category;
         $book->shelf = $request->shelf;
-        $book->fav_status = 'no';
-        $book->likes = 0;
         $book->published_date = $request->date;
         $book->createdby = Auth::user()->name;
         $book->save();

@@ -52,6 +52,8 @@ Route::post('/users-register', [RegisterController::class, 'registeruser'])->nam
 
 Route::get('/user-all-books', [UsersController::class, 'allbooks'])->name('user.all.books');
 Route::get('/user-mark-book/{id}', [UsersController::class, 'markbook'])->name('mark.fav');
+Route::get('/user-unmark-book/{id}', [UsersController::class, 'unmarkbook'])->name('unmark.fav');
 Route::get('/user-like-book/{id}', [UsersController::class, 'likebook'])->name('like.book');
+Route::get('/user-popular-books', [UsersController::class, 'popularbooks'])->name('popular.books');
 
 

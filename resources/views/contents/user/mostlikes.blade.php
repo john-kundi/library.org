@@ -7,13 +7,13 @@
     <body>
         
         <header>
-            @include('includes.admin.header')
+            @include('includes.user.header')
         </header>
         
         <section>
             <div class="mainwrapper">
                 <div class="leftpanel">
-                    @include('includes.admin.leftpanel')
+                    @include('includes.user.leftpanel')
                     
                 </div><!-- leftpanel -->
                 
@@ -71,11 +71,11 @@
                         <hr>
       
                         <div class="row">
+                          <div class="col-sm-9">
                             @include('includes.status')
-                          <div class="col-sm-12">
                             <div class="row media-manager">
                               
-                              @foreach($books as $book)
+                              @foreach($likes as $like)
                               <div class="col-xs-6 col-sm-4 col-md-3 document">
                                 <div class="thmb">
                                   <div class="ckbox ckbox-default">
@@ -86,16 +86,12 @@
                                       <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                       </button>
-                                      <ul class="dropdown-menu fm-menu pull-right" role="menu">
-                                        <li><a href="{{ route('admin.edit.book',$book->id) }}"><i class="fa fa-pencil"></i> Edit</a></li>
-                                        <li><a href="{{ route('admin.delete.book',$book->id) }}"><i class="fa fa-trash-o"></i> Delete</a></li>
-                                      </ul>
                                   </div><!-- btn-group -->
                                   <div class="thmb-prev">
                                     <img src="/assets/images/photos/media-doc.png" class="img-responsive" alt="" />
                                   </div>
-                                  <h5 class="fm-title"><a href="">{{ $book->name }}</a></h5>
-                                  <small class="text-muted">Published: {{ $book->date }}</small>
+                                  <h5 class="fm-title"><a href="">{{ $like->name }}</a></h5>
+                                  <small class="text-muted">Likes: {{ $like->occurency }}</small>
                                 </div><!-- thmb -->
                               </div><!-- col-xs-6 -->
                               @endforeach
@@ -115,6 +111,22 @@
                             
                             
                           </div><!-- col-sm-9 -->
+                          <div class="col-sm-3">
+                            <div class="media-manager-sidebar">
+                              
+                              <button class="btn btn-primary btn-block">Upload Files</button>
+                              
+                              
+                              
+                              <div class="mb30"></div>
+                              
+                              <h5 class="lg-title">Tags</h5>
+                              <ul class="tag-list">
+                                <li><a href="{{ route('popular.books') }}">Popular Books</a></li>
+                              </ul>
+                              
+                            </div>
+                          </div><!-- col-sm-3 -->
                         </div>
                       </div>
                     

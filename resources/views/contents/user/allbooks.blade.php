@@ -72,6 +72,7 @@
       
                         <div class="row">
                           <div class="col-sm-9">
+                            @include('includes.status')
                             <div class="row media-manager">
                               
                               @foreach($books as $book)
@@ -86,13 +87,20 @@
                                         <span class="caret"></span>
                                       </button>
                                       <ul class="dropdown-menu fm-menu pull-right" role="menu">
-            @if($book->fav_status == 'yes')
-            <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Unmark Favorite</a></li>
-            @elseif($book->fav_status == 'no')
+
+        @foreach($favorites as $favorite)
+
+           @if((Auth::user()->id == $favorite->user_id) && ($favorite->status == 'yes') && ($favorite->book_id == $book->id))
+            <li><a href="{{ route('unmark.fav',$book->id) }}"><i class="fa fa-share"></i>Unmark Favorite</a></li>
+           @elseif((Auth::user()->id == $favorite->user_id) && ($favorite->status == 'no') && ($favorite->book_id == $book->id))
             <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
-            @endif
-                                        <li><a href="{{ route('like.book',$book->id) }}"><i class="fa fa-envelope-o"></i> Like</a></li>
-                                        <li><a href="#"><i class="fa fa-download"></i> Comment</a></li>
+           @elseif($book->id > 0 )
+            <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
+           @endif
+
+        @endforeach
+            <li><a href="{{ route('like.book',$book->id) }}"><i class="fa fa-envelope-o"></i> Like</a></li>
+            <li><a href="#"><i class="fa fa-download"></i> Comment</a></li>
                                       </ul>
                                   </div><!-- btn-group -->
                                   <div class="thmb-prev">
@@ -124,22 +132,13 @@
                               
                               <button class="btn btn-primary btn-block">Upload Files</button>
                               
-                              <div class="mb30"></div>
                               
-                              <h5 class="lg-title">Folders <a href="" class="pull-right">+ Add New Folder</a></h5>
-                              <ul class="folder-list">
-                                <li><a href=""><i class="fa fa-folder-o"></i> My Collection</a></li>
-                                <li><a href=""><i class="fa fa-folder-o"></i> Downloaded Books</a></li>
-                                <li><a href=""><i class="fa fa-folder-o"></i> Already Read E-book</a></li>
-                              </ul>
                               
                               <div class="mb30"></div>
                               
                               <h5 class="lg-title">Tags</h5>
                               <ul class="tag-list">
-                                <li><a href="">Popular Books</a></li>
-                                <li><a href="">Marked Books</a></li>
-                                <li><a href="">E-book Documentation</a></li>
+                                <li><a href="{{ route('popular.books') }}">Popular Books</a></li>
                               </ul>
                               
                             </div>

@@ -1,6 +1,6 @@
 <div class="media profile-left">
                         <a class="pull-left profile-thumb" href="profile.html">
-                            <img class="img-circle" src="images/photos/profile.png" alt="">
+                            <img class="img-circle" src="/assets/images/photos/profile.png" alt="">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading">{{ Auth::user()->name }}</h4>

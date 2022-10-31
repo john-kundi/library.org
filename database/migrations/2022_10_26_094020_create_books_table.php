@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('pdf'); //pdf
             $table->string('fav_status')->nullable(); //yes / no
-            $table->string('likes')->nullable(); //yes / no
-            $table->string('createdby')->nullable(); //addded by
+            $table->string('likes')->nullable(); 
+            $table->string('likedby')->nullable(); //addded by
             $table->timestamps();
         });
     }
