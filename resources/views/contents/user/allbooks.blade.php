@@ -74,7 +74,7 @@
                           <div class="col-sm-9">
                             @include('includes.status')
                             <div class="row media-manager">
-                              
+                              @if(!empty($books) && $books->count())
                               @foreach($books as $book)
                               <div class="col-xs-6 col-sm-4 col-md-3 document">
                                 <div class="thmb">
@@ -111,18 +111,12 @@
                                 </div><!-- thmb -->
                               </div><!-- col-xs-6 -->
                               @endforeach
-                               
+                            @endif
                             </div><!-- row -->
                             
                             <br />
                             <ul class="pagination pagination-split mt5">
-                                <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li class="active"><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                <li><a href="#">{{ $books->links() }}</a></li>
                             </ul>
                             
                             

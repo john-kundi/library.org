@@ -33,7 +33,8 @@ class UsersController extends Controller
                         'books.pdf',
                         'books.createdby'
                     ])
-                    ->get();
+                    ->paginate(12);
+
         $favorites = DB::table('books')
                     ->join('favorites','favorites.book_id','=','books.id')
                     ->select([
@@ -50,7 +51,7 @@ class UsersController extends Controller
                         'books.pdf',
                         'books.createdby'
                     ])
-                    ->get();
+                    ->paginate(12);
         
                     return view('contents.user.allbooks')
                                    ->with('books',$books)
