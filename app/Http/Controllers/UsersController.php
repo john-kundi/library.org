@@ -51,6 +51,7 @@ class UsersController extends Controller
                         'books.pdf',
                         'books.createdby'
                     ])
+                    ->where('status','=','yes')
                     ->paginate(12);
         
                     return view('contents.user.allbooks')

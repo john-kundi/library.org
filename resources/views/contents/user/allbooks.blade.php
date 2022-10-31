@@ -86,19 +86,17 @@
                                       <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                       </button>
-                                      <ul class="dropdown-menu fm-menu pull-right" role="menu">
+                                      <ul class="dropdown-menu fm-menu pull-right" role="menu">          
 
-        @foreach($favorites as $favorite)
-
-           @if((Auth::user()->id == $favorite->user_id) && ($favorite->status == 'yes') && ($favorite->book_id == $book->id))
+            <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
+            @foreach($favorites as $favorite)
+            @if(($favorite->status == 'yes') && ($favorite->user_id == Auth::user()->id) && ($favorite->book_id == $book->id))
             <li><a href="{{ route('unmark.fav',$book->id) }}"><i class="fa fa-share"></i>Unmark Favorite</a></li>
-           @elseif((Auth::user()->id == $favorite->user_id) && ($favorite->status == 'no') && ($favorite->book_id == $book->id))
-            <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
-           @elseif($book->id > 0 )
-            <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
-           @endif
+            @elseif(($favorite->status == 'no') && ($favorite->user_id == Auth::user()->id) && ($favorite->book_id == $book->id))
+            <li><a href="{{ route('unmark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
+            @endif
+            @endforeach
 
-        @endforeach
             <li><a href="{{ route('like.book',$book->id) }}"><i class="fa fa-envelope-o"></i> Like</a></li>
             <li><a href="#"><i class="fa fa-download"></i> Comment</a></li>
                                       </ul>
