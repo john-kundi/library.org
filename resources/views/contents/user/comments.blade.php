@@ -29,7 +29,7 @@
                                     <li><a href="">Store</a></li>
                                     <li>All Books</li>
                                 </ul>
-                                <h4>Books Dashboard</h4>
+                                <h4>Comment Dashboard</h4>
                             </div>
                         </div><!-- media -->
                     </div><!-- pageheader -->
