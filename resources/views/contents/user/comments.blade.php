@@ -72,52 +72,68 @@
       
                         <div class="row">
                           <div class="col-sm-9">
-                            @include('includes.status')
-                            <div class="row media-manager">
-                              @if(!empty($books) && $books->count())
-                              @foreach($books as $book)
-                              <div class="col-xs-6 col-sm-4 col-md-3 document">
-                                <div class="thmb">
-                                  <div class="ckbox ckbox-default">
-                                    <input type="checkbox" id="check1" value="1" />
-                                    <label for="check1"></label>
-                                  </div>
-                                  <div class="btn-group fm-group">
-                                      <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                      </button>
-                                      <ul class="dropdown-menu fm-menu pull-right" role="menu">          
+                              <!-- Nav tabs -->
+                                <ul class="nav nav-tabs nav-line">
+                                    <li class="active"><a href="#activities" data-toggle="tab"><strong>Comments</strong></a></li>
+                                </ul>
+                            
+                                <!-- Tab panes -->
+                                <div class="tab-content nopadding noborder">
+                                    <div class="tab-pane active" id="activities">
+                                        <div class="activity-list">  
+                                            
+                                  
+                                            <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object img-circle" src="images/photos/profile.png" alt="" />
+                                                </a>
+                                                <div class="media-body">
+                                                    <strong>John Kundi</strong> posted a new book. <br />
+                                            <form action="{{ route('user.comment',$book->id) }}" method="post">
+                                                    @csrf
+                                                    <div class="media blog-media">
+                                                        <div class="media-body">
+                                                            <h4 class="media-title">Type Comment here</h4>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-9">
+                                                                <textarea class="form-control" name="comment" rows="5"></textarea>
+                                                                </div>
+                                                                <div class="col-sm-3">
+                                                                <button class="btn btn-primary btn-sm">Share Comment</button>
+                                                                </div>
+                                                            </div><!-- form-group -->
+                                                        </div>
+                                                      </div><!-- media --> 
+                                                      </form>     
+                                                </div><!-- media-body -->
+                                            </div><!-- media -->
+                                  
+                                          @if($comments->count() && !empty($comments))
+                                          @foreach($comments as $comment)
+                                          
+                                            <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object img-circle" src="/assets/images/photos/profile.png" alt="" />
+                                                </a>
+                                                <div class="media-body">
+                                                    
+                                                    <strong>{{Auth::user()->name}}</strong> posted a new comment. <br />
+                                                    
+                                                    <p>{{ $comment->message }} <a href="">Read more</a></p>
+                                                </div>
+                                            </div><!-- media -->
+                                          
+                                          @endforeach
+                                          @else
+                                            <div class="media">
+                                                <h5>No comment recently....</h5>
+                                            </div>
+                                          
+                                          @endif
 
-            <li><a href="{{ route('mark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
-            @foreach($favorites as $favorite)
-            @if(($favorite->status == 'yes') && ($favorite->user_id == Auth::user()->id) && ($favorite->book_id == $book->id))
-            <li><a href="{{ route('unmark.fav',$book->id) }}"><i class="fa fa-share"></i>Unmark Favorite</a></li>
-            @elseif(($favorite->status == 'no') && ($favorite->user_id == Auth::user()->id) && ($favorite->book_id == $book->id))
-            <li><a href="{{ route('unmark.fav',$book->id) }}"><i class="fa fa-share"></i>Mark Favorite</a></li>
-            @endif
-            @endforeach
-
-            <li><a href="{{ route('like.book',$book->id) }}"><i class="fa fa-envelope-o"></i> Like</a></li>
-            <li><a href="{{ route('book.comment',$book->id) }}"><i class="fa fa-download"></i> Comment</a></li>
-                                      </ul>
-                                  </div><!-- btn-group -->
-                                  <div class="thmb-prev">
-                                    <img src="/assets/images/photos/media-doc.png" class="img-responsive" alt="" />
-                                  </div>
-                                  <h5 class="fm-title"><a href="">{{ $book->name }}</a></h5>
-                                  <small class="text-muted">Published: {{ $book->date }}</small>
-                                </div><!-- thmb -->
-                              </div><!-- col-xs-6 -->
-                              @endforeach
-                            @endif
-                            </div><!-- row -->
-                            
-                            <br />
-                            <ul class="pagination pagination-split mt5">
-                                <li><a href="#">{{ $books->links() }}</a></li>
-                            </ul>
-                            
-                            
+                                        </div><!-- activity-list -->
+                                    </div>
+                                    </div><!-- tab-pane -->
                           </div><!-- col-sm-9 -->
                           <div class="col-sm-3">
                             <div class="media-manager-sidebar">

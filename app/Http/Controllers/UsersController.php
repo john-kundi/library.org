@@ -148,4 +148,29 @@ class UsersController extends Controller
 
         }
 
+        public function commentform($id)
+        {
+           $book = DB::table('books')->select('name','createdby','id')->where('id',$id)->first();
+           $users = DB::table('users')->get();
+           $comments = DB::table('books')->join('comments','comments.book_id','=','books.id')
+                                    ->select([
+                                            'books.id',
+                                            'comments.user_id',
+                                            'comments.message'   
+                                    ])
+                                    ->get();
+
+    return view('contents.user.comments')->with('book',$book)->with('users',$users)->with('comments',$comments);
+        }
+
+        public function comment(request $request,$id)
+        {
+            DB::table('comments')->insert([
+                                'book_id' => $id,
+                                'user_id' => Auth::user()->id,
+                                'message' => $request->comment
+                        ]);
+            return redirect()->back()->with('status','Comment shared successful');
+        }
+
 }

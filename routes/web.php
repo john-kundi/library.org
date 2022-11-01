@@ -55,5 +55,7 @@ Route::get('/user-mark-book/{id}', [UsersController::class, 'markbook'])->name('
 Route::get('/user-unmark-book/{id}', [UsersController::class, 'unmarkbook'])->name('unmark.fav');
 Route::get('/user-like-book/{id}', [UsersController::class, 'likebook'])->name('like.book');
 Route::get('/user-popular-books', [UsersController::class, 'popularbooks'])->name('popular.books');
+Route::get('/user-comment-form/{id}', [UsersController::class, 'commentform'])->name('book.comment');
+Route::post('/user-comment/{id}', [UsersController::class, 'comment'])->name('user.comment');
 
 
