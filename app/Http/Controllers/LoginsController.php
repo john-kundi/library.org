@@ -30,7 +30,7 @@ class LoginsController extends Controller
             }
 
             else{
-                dd('unknown role');
+                return redirect()->back()->with('status','You are unknown. Please get registered first.');
             }
              
         }

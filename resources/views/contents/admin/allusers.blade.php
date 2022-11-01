@@ -18,6 +18,7 @@
                 </div><!-- leftpanel -->
                 
                 <div class="mainpanel">
+                    
                     <div class="pageheader">
                         <div class="media">
                             <div class="pageicon pull-left">
@@ -34,6 +35,7 @@
                     </div><!-- pageheader -->
                     
                     <div class="contentpanel">
+                                @include('includes.status')
                         
                             <div class="panel panel-primary-head">
                             <div class="panel-heading">

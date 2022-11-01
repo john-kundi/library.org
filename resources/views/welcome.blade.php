@@ -11,6 +11,7 @@
             
             <div class="panel panel-signin">
                 <div class="panel-body">
+                    @include('includes.status')
                     <h4 class="text-center mb5">Library Management System</h4>
                     <!-- <p class="text-center">User Login</p> -->
                     
